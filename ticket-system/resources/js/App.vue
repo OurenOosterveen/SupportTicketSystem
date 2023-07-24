@@ -12,5 +12,6 @@ import {RouterView} from 'vue-router';
 .content-view{
     display: grid;
     place-items: center;
+    max-width: 1440px;
 }
 </style>

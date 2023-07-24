@@ -1,9 +1,9 @@
-import { computed, ref } from 'vue';
+import {Credentials, User} from './types';
+import {computed, ref} from 'vue';
+import {getRequest, postRequest} from '../services/http';
+import {goToOverviewPage, goToRoute, registerBeforeRouteMiddleware} from '../services/router';
+import {setTranslation} from '../services/translation';
 import Login from './pages/Login.vue'
-import { getRequest, postRequest } from '../services/http';
-import { goToOverviewPage, goToRoute, registerBeforeRouteMiddleware } from '../services/router';
-import { Credentials, User } from './types';
-import { setTranslation } from '../services/translation';
 
 const TICKET_NAME = 'tickets'
 
@@ -71,11 +71,14 @@ export const goToLoginPage = () => goToRoute('Login', undefined);
 registerBeforeRouteMiddleware(({meta}) => {
     if (!isLoggedIn.value && meta?.auth) {
         goToLoginPage();
+
         return true;
     }
     if (isLoggedIn.value && !meta?.canSeeWhenLoggedIn) {
         goToOverviewPage(TICKET_NAME);
+
         return true;
     }
+
     return false;
 });
