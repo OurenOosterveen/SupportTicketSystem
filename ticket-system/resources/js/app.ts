@@ -1,13 +1,12 @@
-import { checkIfLoggedIn } from "./auth";
-import { createApp } from "vue";
-import { addRoutes, useRouterInApp } from "./services/router";
-import App from "./App.vue";
-import { routes } from "./routes";
+import {addRoutes, useRouterInApp} from './services/router';
+import {checkIfLoggedIn} from './auth';
+import {createApp} from 'vue';
+import {routes} from './routes';
+import App from './App.vue';
 
 const app = createApp(App);
 
 addRoutes(routes);
-console.log(routes);
 
-    useRouterInApp(app);
-    app.mount('#app');
+useRouterInApp(app);
+app.mount('#app');
