@@ -1,18 +1,23 @@
 <template>
     <div class="authbox">
+        <h1>Ticket systeem</h1>
         <label for="email">E-mail</label>
+        <div v-if="getErrorBag.email" class="error">Een email is verplicht</div>
         <input id="email" v-model="credentials.email" type="email" name="email" />
 
         <label for="password">Wachtwoord</label>
+        <div v-if="getErrorBag.password" class="error">Een wachtwoord is verplicht</div>
         <input id="password" v-model="credentials.password" type="password" name="password" />
 
+        <div v-if="false" class="error">Deze combinatie van email en wachtwoord </div>
         <button @click="submit">Log in</button>
     </div>
 </template>
 
 <script setup lang="ts">
-import { login } from '..';
 import {Credentials} from '../types';
+import {getErrorBag} from 'services/error';
+import {login} from '..';
 import {ref} from 'vue';
 
 const credentials = ref<Credentials>({
@@ -20,8 +25,8 @@ const credentials = ref<Credentials>({
     password: '',
 })
 
-const submit = () => {
-    login(credentials.value)
+const submit = async () => {
+    await login(credentials.value);
 }
 
 </script>
@@ -41,11 +46,17 @@ const submit = () => {
         border: 1px solid grey;
     }
 
-    label {
-        margin-top: 1rem;
+    input {
+        margin-bottom: 1rem;
     }
 
     button {
+        font-size: large;
         margin-top: 1rem;
+    }
+
+    .error {
+        color: red;
+        font-size: small;
     }
 </style>

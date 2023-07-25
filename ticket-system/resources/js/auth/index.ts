@@ -31,12 +31,6 @@ export const authRoutes = [
     //     component: RequestResetPassword,
     //     meta: {auth: false, canSeeWhenLoggedIn: false},
     // },
-    // {
-    //     path: '/registreren/:token',
-    //     name: 'register',
-    //     component: Register,
-    //     meta: {auth: false, canSeeWhenLoggedIn: false},
-    // },
 ];
 
 const loggedInUser = ref<User | null>(null);

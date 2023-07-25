@@ -47,4 +47,16 @@ class AuthController extends Controller
         return (new JsonResponse($responseData, Response::HTTP_OK))
             ->cookie(self::COOKIE_NAME, "Bearer {$token}", 60 * 24 * 30, '/', '', $secureCookie, true);
     }
+
+    /**
+     * Log the user out (Invalidate the token). And delete the Authorization cookie
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(): JsonResponse
+    {
+        $this->guard->logout();
+
+        return (new JsonResponse)->cookie(self::COOKIE_NAME);
+    }
 }
