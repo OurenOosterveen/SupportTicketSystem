@@ -11,11 +11,16 @@
 
         <div v-if="getErrorBag.credentials" class="error">{{ getErrorBag['credentials'] }} </div>
         <button @click="submit">Log in</button>
+
+        <RouterLink :to="{name: 'forgotPassword'}" style="font-size: small; align-self: center;">
+            Wachtwoord vergeten?
+        </RouterLink>
     </div>
 </template>
 
 <script setup lang="ts">
 import {Credentials} from '../types';
+import {RouterLink} from 'vue-router';
 import {TICKET_DOMAIN_NAME} from 'domains/tickets';
 import {getErrorBag} from 'services/error';
 import {goToOverviewPage} from 'services/router';
@@ -58,6 +63,7 @@ const submit = async () => {
         margin-top: 1rem;
         padding: 0.5rem;
         border-radius: 10px;
+        width: 100%;
     }
 
     .error {

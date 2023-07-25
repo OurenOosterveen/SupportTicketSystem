@@ -3,6 +3,7 @@ import {TICKET_DOMAIN_NAME} from 'domains/tickets';
 import {computed, ref} from 'vue';
 import {getRequest, postRequest} from 'services/http';
 import {goToOverviewPage, goToRoute, registerBeforeRouteMiddleware} from 'services/router';
+import ForgotPasswordPage from './pages/ForgotPassword.vue';
 import Login from './pages/Login.vue'
 
 export const authRoutes = [
@@ -18,12 +19,12 @@ export const authRoutes = [
     //     component: ResetPassword,
     //     meta: {auth: false, canSeeWhenLoggedIn: false},
     // },
-    // {
-    //     path: '/wachtwoord-vergeten',
-    //     name: 'forgotPassword',
-    //     component: RequestResetPassword,
-    //     meta: {auth: false, canSeeWhenLoggedIn: false},
-    // },
+    {
+        path: '/wachtwoord-vergeten',
+        name: 'forgotPassword',
+        component: ForgotPasswordPage,
+        meta: {auth: false, canSeeWhenLoggedIn: false},
+    },
 ];
 
 const loggedInUser = ref<User | null>(null);
