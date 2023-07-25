@@ -9,7 +9,7 @@
         <div v-if="getErrorBag.password" class="error">Een wachtwoord is verplicht</div>
         <input id="password" v-model="credentials.password" type="password" name="password" />
 
-        <div v-if="false" class="error">Deze combinatie van email en wachtwoord </div>
+        <div v-if="getErrorBag.credentials" class="error">{{ getErrorBag['credentials'] }} </div>
         <button @click="submit">Log in</button>
     </div>
 </template>
@@ -24,6 +24,8 @@ const credentials = ref<Credentials>({
     email: '',
     password: '',
 })
+
+const errors = getErrorBag;
 
 const submit = async () => {
     await login(credentials.value);
@@ -53,6 +55,8 @@ const submit = async () => {
     button {
         font-size: large;
         margin-top: 1rem;
+        padding: 0.5rem;
+        border-radius: 10px;
     }
 
     .error {

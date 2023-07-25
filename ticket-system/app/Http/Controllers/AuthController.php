@@ -32,7 +32,10 @@ class AuthController extends Controller
         $token = $this->guard->attempt(['email' => $validated['email'], 'password' => $validated['password']]);
 
         if (!$token) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return new JsonResponse(
+                ['errors' => ['credentials' => 'E-mail of wachtwoord is onjuist']],
+                Response::HTTP_UNPROCESSABLE_ENTITY,
+            );
         }
 
         $user = $this->guard->userOrFail();
