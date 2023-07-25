@@ -1,4 +1,8 @@
-import { authRoutes } from "../auth";
+import {authRoutes} from 'domains/auth';
+import {projectRoutes} from 'domains/tickets';
 
 
-export const routes = [...authRoutes];
+export const routes = [
+    ...authRoutes,
+    ...projectRoutes,
+];

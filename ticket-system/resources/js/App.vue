@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import {RouterView} from 'vue-router';
-import {isLoggedIn, logout} from './auth';
+import {isLoggedIn, logout} from 'domains/auth';
 </script>
 
 <style>

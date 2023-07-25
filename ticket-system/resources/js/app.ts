@@ -1,5 +1,5 @@
 import {addRoutes, useRouterInApp} from './services/router';
-import {checkIfLoggedIn} from './auth';
+import {checkIfLoggedIn} from './domains/auth';
 import {createApp} from 'vue';
 import {routes} from './routes';
 import App from './App.vue';

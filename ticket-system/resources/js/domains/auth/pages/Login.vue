@@ -16,19 +16,20 @@
 
 <script setup lang="ts">
 import {Credentials} from '../types';
+import {TICKET_DOMAIN_NAME} from 'domains/tickets';
 import {getErrorBag} from 'services/error';
+import {goToOverviewPage} from 'services/router';
 import {login} from '..';
 import {ref} from 'vue';
 
 const credentials = ref<Credentials>({
     email: '',
     password: '',
-})
-
-const errors = getErrorBag;
+});
 
 const submit = async () => {
     await login(credentials.value);
+    goToOverviewPage(TICKET_DOMAIN_NAME);
 }
 
 </script>

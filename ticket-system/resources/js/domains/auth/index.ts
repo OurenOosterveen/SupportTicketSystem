@@ -1,16 +1,9 @@
 import {Credentials, User} from './types';
+import {TICKET_DOMAIN_NAME} from 'domains/tickets';
 import {computed, ref} from 'vue';
-import {getRequest, postRequest} from '../services/http';
-import {goToOverviewPage, goToRoute, registerBeforeRouteMiddleware} from '../services/router';
-import {setTranslation} from '../services/translation';
+import {getRequest, postRequest} from 'services/http';
+import {goToOverviewPage, goToRoute, registerBeforeRouteMiddleware} from 'services/router';
 import Login from './pages/Login.vue'
-
-const TICKET_NAME = 'tickets'
-
-setTranslation(TICKET_NAME, {
-    singular: 'project',
-    plural: 'projecten',
-});
 
 export const authRoutes = [
     {
@@ -47,6 +40,7 @@ export const login = async (credentials: Credentials) => {
 export const logout = async () => {
     await getRequest('logout');
     loggedInUser.value = null;
+    goToLoginPage();
 };
 
 export const me = async () => {
@@ -69,7 +63,7 @@ registerBeforeRouteMiddleware(({meta}) => {
         return true;
     }
     if (isLoggedIn.value && !meta?.canSeeWhenLoggedIn) {
-        goToOverviewPage(TICKET_NAME);
+        goToOverviewPage(TICKET_DOMAIN_NAME);
 
         return true;
     }
