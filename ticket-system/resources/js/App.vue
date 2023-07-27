@@ -1,6 +1,6 @@
 <template>
     <div class="content-view">
-        <a v-if="isLoggedIn" @click="logout">Uitloggen</a>
+        <button v-if="isLoggedIn" class="btn btn-primary" style="width: 8rem;" @click="logout">Uitloggen</button>
         <RouterView />
     </div>
 </template>

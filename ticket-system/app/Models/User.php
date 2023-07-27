@@ -81,4 +81,9 @@ class User extends Model implements JWTSubject, AuthenticatableContract, AuthCan
     {
         return [];
     }
+
+    public function scopeWhereAdmin($query)
+    {
+        return $query->where('is_admin', true);
+    }
 }
