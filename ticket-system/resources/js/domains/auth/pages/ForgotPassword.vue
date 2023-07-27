@@ -1,22 +1,22 @@
 <template>
-    <div class="authbox">
+    <form class="authbox" @submit.prevent>
         <h1>Wachtwoord vergeten</h1>
 
         <label for="email">E-mail</label>
-        <div v-if="getErrorBag['email']" class="error">Email veld required</div>
+        <FormError name="email" />
         <input id="email" v-model="email" type="email" name="email" />
 
         <div class="buttonbox">
             <button @click="submit">Verzenden</button>
             <RouterLink :to="{name: 'Login'}">Terug</RouterLink>
         </div>
-    </div>
+    </form>
 </template>
 <script setup lang="ts">
-import {getErrorBag} from 'services/error';
 import {postRequest} from 'services/http';
 import {ref} from 'vue';
 import {successToast} from 'services/toast';
+import FormError from 'components/FormError.vue';
 
 const email = ref('');
 
@@ -45,9 +45,6 @@ const submit = async () => {
 
     input {
         border: 1px solid grey;
-    }
-
-    input {
         margin-bottom: 1rem;
     }
 
@@ -56,10 +53,5 @@ const submit = async () => {
         margin-top: 1rem;
         padding: 0.5rem;
         border-radius: 10px;
-    }
-
-    .error {
-        color: red;
-        font-size: small;
     }
 </style>

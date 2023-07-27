@@ -43,7 +43,7 @@ class AuthController extends Controller
 
         if (!$token) {
             return new JsonResponse(
-                ['errors' => ['credentials' => 'E-mail of wachtwoord is onjuist']],
+                ['errors' => ['credentials' => ['E-mail of wachtwoord is onjuist']]],
                 Response::HTTP_UNPROCESSABLE_ENTITY,
             );
         }
