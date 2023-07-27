@@ -1,11 +1,9 @@
 <template>
     <div class="content">
-        <RouterLink :to="{name: 'tickets.create'}">Nieuwe ticket</RouterLink>
         <TicketTable v-if="tickets.length" :tickets="tickets" />
     </div>
 </template>
 <script setup lang="ts">
-import {RouterLink} from 'vue-router';
 import {computed} from 'vue';
 import {getLoggedInUser} from 'domains/auth';
 import {ticketStore} from '..';
