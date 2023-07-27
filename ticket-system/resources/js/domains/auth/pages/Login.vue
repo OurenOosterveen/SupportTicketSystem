@@ -1,5 +1,5 @@
 <template>
-    <div class="authbox">
+    <form class="authbox" @submit.prevent>
         <h1>Ticket systeem</h1>
         <label for="email">E-mail</label>
         <FormError name="email" />
@@ -15,7 +15,7 @@
         <RouterLink :to="{name: 'forgotPassword'}" style="font-size: small; align-self: center;">
             Wachtwoord vergeten?
         </RouterLink>
-    </div>
+    </form>
 </template>
 
 <script setup lang="ts">
