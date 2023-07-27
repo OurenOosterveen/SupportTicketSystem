@@ -16,12 +16,21 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory()->create([
-            'first_name' => 'Admin',
-            'last_name' => 'User',
-            'email' => 'test@example.com',
+            'first_name' => 'Test',
+            'last_name' => 'Admin',
+            'email' => 'admin@test.com',
             'password' => bcrypt('0TicketSystem0'),
             'is_admin' => true,
             'telephone_number' => '0123456789',
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'email' => 'user@test.com',
+            'password' => bcrypt('0TicketSystem0'),
+            'is_admin' => false,
+            'telephone_number' => '9876543210',
         ]);
 
         User::factory(20)->create();

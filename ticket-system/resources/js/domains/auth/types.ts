@@ -9,4 +9,5 @@ export interface User {
     lastName: string;
     email: string;
     phonenumber: string;
+    is_admin: boolean;
 }
