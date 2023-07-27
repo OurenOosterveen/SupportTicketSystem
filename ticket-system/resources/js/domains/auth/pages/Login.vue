@@ -2,14 +2,14 @@
     <div class="authbox">
         <h1>Ticket systeem</h1>
         <label for="email">E-mail</label>
-        <div v-if="getErrorBag.email" class="error">Een email is verplicht</div>
+        <FormError name="email" />
         <input id="email" v-model="credentials.email" type="email" name="email" />
 
         <label for="password">Wachtwoord</label>
-        <div v-if="getErrorBag.password" class="error">Een wachtwoord is verplicht</div>
+        <FormError name="password" />
         <input id="password" v-model="credentials.password" type="password" name="password" />
 
-        <div v-if="getErrorBag.credentials" class="error">{{ getErrorBag['credentials'] }} </div>
+        <FormError name="credentials" />
         <button @click="submit">Log in</button>
 
         <RouterLink :to="{name: 'forgotPassword'}" style="font-size: small; align-self: center;">
@@ -22,10 +22,10 @@
 import {Credentials} from '../types';
 import {RouterLink} from 'vue-router';
 import {TICKET_DOMAIN_NAME} from 'domains/tickets';
-import {getErrorBag} from 'services/error';
 import {goToOverviewPage} from 'services/router';
 import {login} from '..';
 import {ref} from 'vue';
+import FormError from 'components/FormError.vue'
 
 const credentials = ref<Credentials>({
     email: '',
@@ -52,9 +52,6 @@ const submit = async () => {
 
     input {
         border: 1px solid grey;
-    }
-
-    input {
         margin-bottom: 1rem;
     }
 
@@ -64,10 +61,5 @@ const submit = async () => {
         padding: 0.5rem;
         border-radius: 10px;
         width: 100%;
-    }
-
-    .error {
-        color: red;
-        font-size: small;
     }
 </style>
