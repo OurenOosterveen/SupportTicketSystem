@@ -1,7 +1,11 @@
 <template>
-    <Table :tickets="tickets" />
+    <div class="content">
+        <RouterLink :to="{name: 'tickets.create'}">Nieuwe ticket</RouterLink>
+        <Table :tickets="tickets" />
+    </div>
 </template>
 <script setup lang="ts">
+import {RouterLink} from 'vue-router';
 import {computed, onMounted} from 'vue';
 import {getLoggedInUser} from 'domains/auth';
 import {ticketStore} from '..';
@@ -17,3 +21,9 @@ onMounted(async () => {
     await ticketStore.actions.getAll();
 })
 </script>
+<style>
+    .content {
+        margin-top: 2rem;
+        width: 100%;
+    }
+</style>

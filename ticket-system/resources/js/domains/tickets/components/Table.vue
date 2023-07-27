@@ -31,14 +31,19 @@ import {userStore} from 'domains/users'
 
 defineProps<{tickets: Ticket[]}>();
 
-const getUserName = (id: number) => {
-    const user = userStore.getters.byId(id).value;
+const categories = categoryStore.getters.all;
+const statuses = statusStore.getters.all;
+const users = userStore.getters.all;
 
-    return `${user.first_name} ${user.last_name}`
+
+const getUserName = (id: number) => {
+    const user = users.value.find(item => item.id === id);
+
+    return `${user?.first_name} ${user?.last_name}`
 }
 
-const getCategory = (id: number) => categoryStore.getters.byId(id).value.title;
-const getStatus = (id: number) => statusStore.getters.byId(id).value.title;
+const getCategory = (id: number) => categories.value.find(item => item.id === id)?.title;
+const getStatus = (id: number) => statuses.value.find(item => item.id === id)?.title;
 
 onMounted(async () => {
     await userStore.actions.getAll();
@@ -50,7 +55,6 @@ onMounted(async () => {
     .ticket-table {
         padding: .5rem;
         background-color:lightskyblue;
-        margin-top: 2rem;
         width: 100%;
         border-collapse: collapse;
     }

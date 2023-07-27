@@ -4,11 +4,11 @@ import {setTranslation} from 'services/translation';
 import {storeModuleFactory} from 'services/store';
 
 
-export const STATUS_DOMAIN_NAME = 'status'
+export const STATUS_DOMAIN_NAME = 'statuses'
 
 setTranslation(STATUS_DOMAIN_NAME, {
     singular: 'status',
-    plural: 'status',
+    plural: 'statuses',
 });
 
 export const statusStore = storeModuleFactory<Status>(STATUS_DOMAIN_NAME);

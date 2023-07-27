@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('categories', CategoryController::class);
 
-    Route::resource('status', StatusController::class);
+    Route::resource('statuses', StatusController::class);
 
     Route::resource('tickets', TicketController::class);
 
