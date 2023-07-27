@@ -1,24 +1,33 @@
 <template>
-    <form @submit.prevent>
-        <label for="title">Titel</label>
-        <FormError name="title" />
-        <input id="title" v-model="form.title" type="text" name="title" />
+    <form class="max-w-100" @submit.prevent>
+        <div class="form-group">
+            <label for="title">Titel</label>
+            <input id="title" v-model="form.title" type="text" name="title" class="form-control" />
+            <FormError name="title" />
+        </div>
 
-        <label for="content">Inhoud</label>
-        <FormError name="content" />
-        <textarea id="content" v-model="form.content" name="content" />
+        <div class="form-group">
+            <label for="content">Inhoud</label>
+            <textarea id="content" v-model="form.content" name="content" class="form-control" />
+            <FormError name="content" />
+        </div>
 
-        <label for="category">Categorie</label>
-        <FormError name="category" />
-        <select v-model="form.category_id">
-            <option v-for="category in categories" :key="category.id">{{ category.title }}</option>
-        </select>
+        <div class="form-group">
+            <label for="category">Categorie</label>
+            <select id="category" v-model="form.category_id" class="form-select">
+                <option v-for="category in categories" :key="category.id">{{ category.title }}</option>
+            </select>
+            <FormError name="category" />
+        </div>
 
-        <label for="category">Status</label>
-        <FormError name="category" />
-        <select v-model="form.status_id">
-            <option v-for="status in statuses" :key="status.id">{{ status.title }}</option>
-        </select>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" v-model="form.status_id" class="form-select">
+                <option v-for="status in statuses" :key="status.id">{{ status.title }}</option>
+            </select>
+            <FormError name="category" />
+        </div>
+        <button type="submit" class="btn btn-primary">Aanmaken</button>
     </form>
 </template>
 <script setup lang="ts">

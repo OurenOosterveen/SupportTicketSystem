@@ -1,5 +1,8 @@
 <template>
-    <TicketForm :form="ticket" />
+    <div>
+        <h3>Nieuwe ticket toevoegen</h3>
+        <TicketForm :form="ticket" />
+    </div>
 </template>
 <script setup lang="ts">
 import {New} from 'services/store/types';
