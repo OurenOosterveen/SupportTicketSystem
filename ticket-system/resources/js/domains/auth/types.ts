@@ -5,9 +5,9 @@ export interface Credentials {
 
 export interface User {
     id: number;
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     email: string;
-    phonenumber: string;
+    telephone_number: string;
     is_admin: boolean;
 }

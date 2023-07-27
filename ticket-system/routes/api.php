@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +26,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('me', [AuthController::class, 'me']);
 
+    Route::resource('categories', CategoryController::class);
+
+    Route::resource('status', StatusController::class);
+
     Route::resource('tickets', TicketController::class);
+
+    Route::resource('users', UserController::class);
+
+    
 });
