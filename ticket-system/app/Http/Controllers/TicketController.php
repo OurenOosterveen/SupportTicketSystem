@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use App\Http\Resources\TicketResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class TicketController extends Controller
 {
@@ -13,9 +15,9 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): JsonResource
     {
-        //
+        return TicketResource::collection(Ticket::all());
     }
 
     /**
