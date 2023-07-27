@@ -1,10 +1,19 @@
 <template>
     <div class="authbox">
-        <h1>Wachtwoord vergeten</h1>
+        <h1>Nieuw wachtwoord instellen</h1>
 
-        <label for="email">E-mail</label>
-        <div v-if="getErrorBag['email']" class="error">Email veld required</div>
-        <input id="email" v-model="email" type="email" name="email" />
+        <label for="password">Wachtwoord</label>
+        <div v-if="getErrorBag['password']" class="error">Wachtwoord is verplicht</div>
+        <input id="password" v-model="credentials.password" type="password" name="password" />
+
+        <label for="password_confirmation">Wachtwoord opnieuw</label>
+        <div v-if="getErrorBag['password_confirmation']" class="error">Wachtwoord is verplicht</div>
+        <input 
+            id="password_confirmation"
+            v-model="credentials.password_confirmation" 
+            type="password" 
+            name="password_confirmation" 
+        />
 
         <div class="buttonbox">
             <button @click="submit">Verzenden</button>
@@ -14,15 +23,24 @@
 </template>
 <script setup lang="ts">
 import {getErrorBag} from 'services/error';
+import {goToLoginPage} from '..';
 import {postRequest} from 'services/http';
 import {ref} from 'vue';
 import {successToast} from 'services/toast';
+import {useRoute} from 'vue-router';
 
-const email = ref('');
+const route = useRoute();
+const credentials = ref({
+    email: route.query.email,
+    token: route.query.token,
+    password: '',
+    password_confirmation: '',
+});
 
 const submit = async () => {
-    await postRequest('forgot-password', {email: email.value});
-    successToast('Wachtwoord reset mail is verstuurd');
+    await postRequest('reset-password', credentials.value);
+    successToast('Wachtwoord is gereset.')
+    goToLoginPage();
 }
 </script>
 

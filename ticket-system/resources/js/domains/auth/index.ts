@@ -5,6 +5,7 @@ import {getRequest, postRequest} from 'services/http';
 import {goToOverviewPage, goToRoute, registerBeforeRouteMiddleware} from 'services/router';
 import ForgotPasswordPage from './pages/ForgotPassword.vue';
 import Login from './pages/Login.vue'
+import ResetPassword from './pages/ResetPassword.vue'
 
 export const authRoutes = [
     {
@@ -13,12 +14,12 @@ export const authRoutes = [
         component: Login,
         meta: {auth: false, canSeeWhenLoggedIn: false},
     },
-    // {
-    //     path: '/wachtwoord-vergeten/:token/:email',
-    //     name: 'resetPassword',
-    //     component: ResetPassword,
-    //     meta: {auth: false, canSeeWhenLoggedIn: false},
-    // },
+    {
+        path: '/wachtwoord-updaten',
+        name: 'resetPassword',
+        component: ResetPassword,
+        meta: {auth: false, canSeeWhenLoggedIn: false},
+    },
     {
         path: '/wachtwoord-vergeten',
         name: 'forgotPassword',

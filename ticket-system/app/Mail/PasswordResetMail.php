@@ -25,7 +25,7 @@ class PasswordResetMail extends Mailable
     public function __construct(User $user, string $token)
     {
         $this->user = $user;
-        $this->url = env('APP_URL'). "/resetpassword?token=" . $token . '&email=' . urlencode($user->email);
+        $this->url = env('APP_URL'). "/wachtwoord-updaten?token=" . $token . '&email=' . urlencode($user->email);
     }
 
     /**

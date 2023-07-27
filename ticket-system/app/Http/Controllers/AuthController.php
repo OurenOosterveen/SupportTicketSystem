@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Resources\LoggedInUserResource;
 use App\Http\Responses\NoContentResponse;
 use App\Mail\PasswordResetMail;
 use App\Models\User;
 use App\Models\PasswordReset;
 use Carbon\Carbon;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -77,11 +79,31 @@ class AuthController extends Controller
 
         $user = User::where('email', $validated['email'])->first();
         
-        if ($user) {
-            $token = (new PasswordReset)->create($user);
-
-            Mail::to($user->email)->queue(new PasswordResetMail($user, $token));
+        if (!$user) {
+            return new NoContentResponse;
         }
+
+        $token = (new PasswordReset)->create($user);
+
+        Mail::to($user->email)->queue(new PasswordResetMail($user, $token));
+        
+        return new NoContentResponse;
+    }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        $validated = $request->validated();
+
+        $user = User::where('email', $validated['email'])->first();
+        
+        if (!$user) {
+            return new NoContentResponse;
+        }
+        
+        $user->password = bcrypt($validated['password']);
+        $user->save();
+
+        PasswordReset::where('email', $user->email)->delete();
 
         return new NoContentResponse;
     }
