@@ -1,12 +1,12 @@
 <template>
     <div class="content">
         <RouterLink :to="{name: 'tickets.create'}">Nieuwe ticket</RouterLink>
-        <Table :tickets="tickets" />
+        <Table v-if="tickets.length" :tickets="tickets" />
     </div>
 </template>
 <script setup lang="ts">
 import {RouterLink} from 'vue-router';
-import {computed, onMounted} from 'vue';
+import {computed} from 'vue';
 import {getLoggedInUser} from 'domains/auth';
 import {ticketStore} from '..';
 import Table from '../components/Table.vue';
@@ -17,9 +17,8 @@ const tickets = computed(() => getLoggedInUser.value?.is_admin
     : ticketStore.getters.all.value.filter(ticket => ticket.user_id === getLoggedInUser.value?.id),
 ); 
 
-onMounted(async () => {
-    await ticketStore.actions.getAll();
-})
+ticketStore.actions.getAll();
+
 </script>
 <style>
     .content {
