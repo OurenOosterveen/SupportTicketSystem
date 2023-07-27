@@ -3,7 +3,7 @@
         <h1>Wachtwoord vergeten</h1>
 
         <label for="email">E-mail</label>
-        <div v-if="getErrorBag['email']" class="error">Email veld required</div>
+        <FormError name="email" />
         <input id="email" v-model="email" type="email" name="email" />
 
         <div class="buttonbox">
@@ -13,10 +13,10 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getErrorBag} from 'services/error';
 import {postRequest} from 'services/http';
 import {ref} from 'vue';
 import {successToast} from 'services/toast';
+import FormError from 'components/FormError.vue';
 
 const email = ref('');
 

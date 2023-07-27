@@ -3,11 +3,11 @@
         <h1>Nieuw wachtwoord instellen</h1>
 
         <label for="password">Wachtwoord</label>
-        <div v-if="getErrorBag['password']" class="error">Wachtwoord is verplicht</div>
+        <FormError name="password" />
         <input id="password" v-model="credentials.password" type="password" name="password" />
 
         <label for="password_confirmation">Wachtwoord opnieuw</label>
-        <div v-if="getErrorBag['password_confirmation']" class="error">Wachtwoord is verplicht</div>
+        <FormError name="password_confirmation" />
         <input 
             id="password_confirmation"
             v-model="credentials.password_confirmation" 
@@ -22,12 +22,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getErrorBag} from 'services/error';
 import {goToLoginPage} from '..';
 import {postRequest} from 'services/http';
 import {ref} from 'vue';
 import {successToast} from 'services/toast';
 import {useRoute} from 'vue-router';
+import FormError from 'components/FormError.vue'
 
 const route = useRoute();
 const credentials = ref({
