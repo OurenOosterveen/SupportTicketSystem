@@ -1,3 +1,4 @@
+import '../sass/app.scss';
 import {addRoutes, useRouterInApp} from './services/router';
 import {checkIfLoggedIn} from 'domains/auth';
 import {createApp} from 'vue';
