@@ -17,7 +17,9 @@
         <tbody>
             <tr v-for="ticket in tickets" :key="ticket.id">
                 <td>{{ ticket.id }}</td>
-                <td>{{ ticket.title }}</td>
+                <td>
+                    <RouterLink :to="{name: 'tickets.show', params: {id: ticket.id}}">{{ ticket.title }}</RouterLink>
+                </td>
                 <td>{{ getCategory(ticket.category_id) }}</td>
                 <td>{{ getStatus(ticket.status_id) }}</td>
                 <td>{{ getUserName(ticket.user_id) }}</td>
@@ -31,6 +33,7 @@
 </template>
 <script setup lang="ts">
 import {New, Updatable} from 'services/store/types';
+import {RouterLink} from 'vue-router';
 import {Ticket} from '../types';
 import {categoryStore} from 'domains/categories';
 import {defineAsyncComponent, ref} from 'vue';
