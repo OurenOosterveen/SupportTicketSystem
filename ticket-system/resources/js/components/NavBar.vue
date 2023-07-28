@@ -5,7 +5,7 @@
         <div id="navbarText" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Overview</a>
+                    <RouterLink :to="{name: 'tickets.overview'}" class="nav-link">Overview</RouterLink>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#" @click="logout">Uitloggen</a>
@@ -15,5 +15,6 @@
     </nav>
 </template>
 <script setup lang="ts">
+import {RouterLink} from 'vue-router';
 import {logout} from 'domains/auth';
 </script>
