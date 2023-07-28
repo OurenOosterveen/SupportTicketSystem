@@ -84,7 +84,23 @@ In a new terminal window, run the following command:
 ```bash
 npm run dev
 ```
-## 5. License
+
+## 5. Registration
+Registering an account is currently not possible. There are accounts seeded that can be logged into. One account is admin, the other account is not admin. The credentials for these accounts are:
+
+Admin account:
+```
+Email:      admin@test.com
+Password:   0TicketSystem0
+```
+
+Non admin account:
+```
+Email:      user@test.com
+Password:   0TicketSystem0
+```
+
+## 6. License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
