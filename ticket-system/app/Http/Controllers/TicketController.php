@@ -6,6 +6,7 @@ use App\Models\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Http\Resources\TicketResource;
+use App\Http\Responses\NoContentResponse;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,8 +18,16 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(): JsonResource
-    {
-        return TicketResource::collection(Ticket::all());
+    {   
+        $currentUser = auth()->user();
+        if ($currentUser) {
+            if ($currentUser->is_admin)
+                return TicketResource::collection(Ticket::all());
+            else 
+                return TicketResource::collection(Ticket::where('user_id', $currentUser->id)->get());
+        }
+
+        return new NoContentResponse;
     }
 
     /**
