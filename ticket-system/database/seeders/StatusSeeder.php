@@ -15,8 +15,8 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        Status::factory()->create(['title' => 'In review']);
-        Status::factory()->create(['title' => 'Open']);
-        Status::factory()->create(['title' => 'Achived']);
+        Status::factory()->create(['title' => 'In afwachting']);
+        Status::factory()->create(['title' => 'In behandeling']);
+        Status::factory()->create(['title' => 'Afgehandeld']);
     }
 }

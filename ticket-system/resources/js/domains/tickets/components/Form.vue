@@ -26,14 +26,7 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="status">Status</label>
-            <FormError name="status_id" />
-            <select id="status" v-model="editable.status_id" class="form-select">
-                <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.title }}</option>
-            </select>
-        </div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-2">
             <button type="button" class="btn btn-primary" @click="$emit('cancel')">Annuleren</button>
             <button type="submit" class="btn btn-primary">Opslaan</button>
         </div>
@@ -44,7 +37,7 @@ import {New, Updatable} from 'services/store/types';
 import {Ticket} from '../types';
 import {categoryStore} from 'domains/categories';
 import {deepCopy} from 'services/helpers/copy';
-import {onMounted, ref} from 'vue';
+import {ref} from 'vue';
 import {statusStore} from 'domains/status';
 import FormError from 'components/FormError.vue';
 
@@ -60,12 +53,10 @@ defineEmits<{
 const editable = ref(deepCopy(props.form))
 
 const categories = categoryStore.getters.all;
-const statuses = statusStore.getters.all;
 
-onMounted(async () => {
-    await categoryStore.actions.getAll();
-    await statusStore.actions.getAll();
-})
+categoryStore.actions.getAll();
+statusStore.actions.getAll();
+
 </script>
 <style>
 button {
