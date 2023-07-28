@@ -1,5 +1,5 @@
 <template>
-    <!-- <button class="btn btn-primary" style="width: 8rem;" @click="createCategoryModal">Nieuwe category</button> -->
+    <button class="btn btn-primary" style="width: fit-content;" @click="createCategoryModal">Nieuwe category</button>
     <table class="table">
         <thead>
             <tr>
@@ -39,20 +39,33 @@
 </template>
 <script setup lang="ts">
 import {Category} from '../types';
-import {Updatable} from 'services/store/types';
+import {New, Updatable} from 'services/store/types';
 import {categoryStore} from '..';
-import {defineAsyncComponent} from 'vue';
+import {defineAsyncComponent, ref} from 'vue';
 import {formModal} from 'services/modal';
 import {successToast} from 'services/toast';
 
 defineProps<{categories: Category[]}>();
 
-const updateCategoryModal = (category: Category) => {
+const newCategory = ref<New<Category>>({title: ''})
+
+const createCategoryModal = () => {
     formModal(
-        category,
+        newCategory.value,
         defineAsyncComponent(() => import('./Form.vue')),
-        async (ticket: Updatable<Category>) => {
-            await categoryStore.actions.update(ticket.id, ticket)
+        async (category: New<Category>) => {
+            await categoryStore.actions.create(category);
+            successToast('Categorie aangemaakt');
+        },
+    )
+}
+
+const updateCategoryModal = (updatedCategory: Category) => {
+    formModal(
+        updatedCategory,
+        defineAsyncComponent(() => import('./Form.vue')),
+        async (category: Updatable<Category>) => {
+            await categoryStore.actions.update(category.id, category);
             successToast('Categorie aangepast');
         },
     )

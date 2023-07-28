@@ -17,6 +17,7 @@ import {Category} from '../types';
 import {Updatable} from 'services/store/types';
 import {deepCopy} from 'services/helpers/copy';
 import {ref} from 'vue';
+import FormError from 'components/FormError.vue';
 
 const props = defineProps<{
     form: Updatable<Category>
