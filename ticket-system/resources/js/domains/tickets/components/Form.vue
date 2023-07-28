@@ -33,8 +33,10 @@
                 <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.title }}</option>
             </select>
         </div>
-        <button type="button" class="btn btn-primary" @click="$emit('cancel')">Annuleren</button>
-        <button type="submit" class="btn btn-primary">Opslaan</button>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" @click="$emit('cancel')">Annuleren</button>
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+        </div>
     </form>
 </template>
 <script setup lang="ts">
@@ -65,3 +67,9 @@ onMounted(async () => {
     await statusStore.actions.getAll();
 })
 </script>
+<style>
+button {
+    margin-left: 1rem;
+    width: auto;
+}
+</style>

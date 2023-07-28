@@ -8,8 +8,10 @@
                 <option v-for="user in admins" :key="user.id" :value="user.id">{{ getUserName(user) }}</option>
             </select>
         </div>
-        <button type="button" class="btn btn-primary" @click="$emit('cancel')">Annuleren</button>
-        <button type="submit" class="btn btn-primary">Opslaan</button>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" @click="$emit('cancel')">Annuleren</button>
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+        </div>
     </form>
 </template>
 <script setup lang="ts">
@@ -37,3 +39,9 @@ const editable = ref(deepCopy(props.form))
 const getUserName = (user: User) => `${user?.first_name} ${user?.last_name}`
 
 </script>
+<style>
+button {
+    margin-left: 1rem;
+    width: auto;
+}
+</style>
