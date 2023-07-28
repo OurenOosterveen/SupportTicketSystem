@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Ticket System</a>
+        <a class="navbar-brand ml-4" href="#">Ticket System</a>
 
         <div id="navbarText" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
