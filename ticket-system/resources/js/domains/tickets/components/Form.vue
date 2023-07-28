@@ -33,8 +33,8 @@
     </form>
 </template>
 <script setup lang="ts">
-import {New, Updatable} from 'services/store/types';
 import {Ticket} from '../types';
+import {Updatable} from 'services/store/types';
 import {categoryStore} from 'domains/categories';
 import {deepCopy} from 'services/helpers/copy';
 import {ref} from 'vue';
@@ -42,11 +42,11 @@ import {statusStore} from 'domains/status';
 import FormError from 'components/FormError.vue';
 
 const props = defineProps<{
-    form: New<Ticket> | Updatable<Ticket>
+    form: Updatable<Ticket>
 }>();
 
 defineEmits<{
-    (event: 'submit', ticket: New<Ticket> | Updatable<Ticket>): void;
+    (event: 'submit', ticket: Updatable<Ticket>): void;
     (event: 'cancel'): void;
 }>();
 
