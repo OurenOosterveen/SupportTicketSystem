@@ -1,0 +1,8 @@
+.authbox {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem;
+    padding: 1.5rem 3rem;
+    background-color: ghostwhite;
+    border-radius: 25px;
+}
