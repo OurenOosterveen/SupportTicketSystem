@@ -1,7 +1,7 @@
 <template>
     <div class="content-view">
         <button v-if="isLoggedIn" class="btn btn-primary" style="width: 8rem;" @click="logout">Uitloggen</button>
-        <RouterView />
+        <RouterView style="max-width: 1440px;" />
     </div>
 </template>
 
@@ -14,6 +14,6 @@ import {isLoggedIn, logout} from 'domains/auth';
 .content-view{
     display: grid;
     place-items: center;
-    max-width: 1440px;
+    max-width: 100%;
 }
 </style>
