@@ -107,4 +107,11 @@ class AuthController extends Controller
 
         return new NoContentResponse;
     }
+
+    public function me(): JsonResponse
+    {
+        return new JsonResponse([
+            'user' => new LoggedInUserResource($this->guard->userOrFail()),
+        ]);
+    }
 }

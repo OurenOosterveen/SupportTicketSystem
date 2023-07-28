@@ -21,7 +21,7 @@ class TicketFactory extends Factory
     {
         return [
             'user_id' => User::all()->random(),
-            'assignee_id' => User::where('is_admin', true)->get()->random(),
+            'assignee_id' => User::whereAdmin()->get()->random(),
             'status_id' => Status::all()->random(),
             'category_id' => Category::all()->random(),
             'title' => fake()->realText(50),

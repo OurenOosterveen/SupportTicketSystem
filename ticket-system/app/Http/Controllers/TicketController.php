@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use App\Http\Resources\TicketResource;
+use App\Models\User;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class TicketController extends Controller
 {
@@ -13,9 +16,9 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): JsonResource
     {
-        //
+        return TicketResource::collection(Ticket::all());
     }
 
     /**
@@ -36,7 +39,18 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $ticket = Ticket::create([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'status_id' => $validated['status_id'],
+            'category_id' => $validated['category_id'],
+            'user_id' => auth()->id(),
+            'assignee_id' => User::whereAdmin()->get()->random()->id,
+        ]);
+
+        return new TicketResource($ticket);
     }
 
     /**
@@ -70,7 +84,8 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        //
+        $ticket->update($request->validated());
+        return new TicketResource($ticket);
     }
 
     /**

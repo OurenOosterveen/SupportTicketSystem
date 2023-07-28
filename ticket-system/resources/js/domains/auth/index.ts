@@ -33,6 +33,8 @@ const loggedInUser = ref<User | null>(null);
 export const isLoggedIn = computed(() => loggedInUser.value !== null);
 export const getLoggedInUser = computed(() => loggedInUser.value);
 
+export const isLoggedInUserAdmin = computed(() => loggedInUser.value?.is_admin);
+
 export const login = async (credentials: Credentials) => {
     const {data} = await postRequest('login', credentials);
     if (!data) return;
