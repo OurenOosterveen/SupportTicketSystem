@@ -12,11 +12,7 @@
             <tr v-for="category in categories" :key="category.id">
                 <td>{{ category.id }}</td>
                 <td>
-                    <RouterLink
-                        :to="{name: 'categories.show', params: {id: category.id}}"
-                    >
-                        {{ category.title }}
-                    </RouterLink>
+                    {{ category.title }}
                 </td>
                 <td>
                     <div class="dropdown show">
@@ -43,7 +39,6 @@
 </template>
 <script setup lang="ts">
 import {Category} from '../types';
-import {RouterLink} from 'vue-router';
 
 defineProps<{categories: Category[]}>();
 

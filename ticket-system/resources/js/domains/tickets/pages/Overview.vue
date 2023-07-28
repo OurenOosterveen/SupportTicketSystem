@@ -1,7 +1,5 @@
 <template>
-    <div class="content">
-        <TicketTable v-if="tickets.length" :tickets="tickets" />
-    </div>
+    <TicketTable v-if="tickets.length" :tickets="tickets" />
 </template>
 <script setup lang="ts">
 import {computed} from 'vue';
@@ -18,9 +16,3 @@ const tickets = computed(() => getLoggedInUser.value?.is_admin
 ticketStore.actions.getAll();
 
 </script>
-<style>
-    .content {
-        margin-top: 2rem;
-        width: 100%;
-    }
-</style>
