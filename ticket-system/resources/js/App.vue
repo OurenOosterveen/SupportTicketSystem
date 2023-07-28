@@ -1,13 +1,14 @@
 <template>
     <div class="content-view">
-        <button v-if="isLoggedIn" class="btn btn-primary" style="width: 8rem;" @click="logout">Uitloggen</button>
-        <RouterView style="max-width: 1440px;" />
+        <NavBar v-if="isLoggedIn" class="w-100" />
+        <RouterView style="max-width: 1440px; margin-top: 4rem;" />
     </div>
 </template>
 
 <script setup lang="ts">
 import {RouterView} from 'vue-router';
-import {isLoggedIn, logout} from 'domains/auth';
+import {isLoggedIn} from 'domains/auth';
+import NavBar from 'components/NavBar.vue';
 </script>
 
 <style>
