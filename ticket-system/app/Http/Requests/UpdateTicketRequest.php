@@ -19,6 +19,7 @@ class UpdateTicketRequest extends FormRequest
             'content' => ['required', 'string', 'max:500'],
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'status_id' => ['required', Rule::exists('statuses', 'id')],
+            'assignee_id' => ['required', Rule::exists('users', 'id')],
         ];
     }
 }

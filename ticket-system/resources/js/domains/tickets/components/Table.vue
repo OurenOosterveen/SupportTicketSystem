@@ -26,7 +26,33 @@
                 <td>{{ ticket.created_at }}</td>
                 <td>{{ ticket.updated_at }}</td>
                 <td>{{ getUserName(ticket.assignee_id) }}</td>
-                <td><button @click="updateTicketModal(ticket)">updaten</button></td>
+                <td>
+                    <div class="dropdown show">
+                        <a
+                            id="dropdownMenuLink"
+                            class="btn btn-secondary dropdown-toggle"
+                            href="#" 
+                            role="button" 
+                            data-toggle="dropdown" 
+                            aria-haspopup="true" 
+                            aria-expanded="false"
+                        >
+                            Actions
+                        </a>
+    
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#" @click="updateTicketModal(ticket)">Updaten</a>
+                            <a 
+                                v-if="isLoggedInUserAdmin"
+                                class="dropdown-item"
+                                href="#"
+                                @click="addAdminModal(ticket)"
+                            >
+                                Admin toewijzen
+                            </a>
+                        </div>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -38,6 +64,7 @@ import {Ticket} from '../types';
 import {categoryStore} from 'domains/categories';
 import {defineAsyncComponent, ref} from 'vue';
 import {formModal} from 'services/modal';
+import {isLoggedInUserAdmin} from 'domains/auth';
 import {statusStore} from 'domains/status';
 import {successToast} from 'services/toast';
 import {ticketStore} from '..';
@@ -48,7 +75,6 @@ defineProps<{tickets: Ticket[]}>();
 const categories = categoryStore.getters.all;
 const statuses = statusStore.getters.all;
 const users = userStore.getters.all;
-
 
 const getUserName = (id: number) => {
     const user = users.value.find(item => item.id === id);
@@ -85,6 +111,17 @@ const updateTicketModal = (updatedTicket: Ticket) => {
     formModal(
         updatedTicket,
         defineAsyncComponent(() => import('./Form.vue')),
+        async (ticket: Updatable<Ticket>) => {
+            await ticketStore.actions.update(ticket.id, ticket)
+            successToast('Ticket aangepast');
+        },
+    )
+}
+
+const addAdminModal = (updatedTicket: Ticket) => {
+    formModal(
+        updatedTicket,
+        defineAsyncComponent(() => import('./AddAdmin.vue')),
         async (ticket: Updatable<Ticket>) => {
             await ticketStore.actions.update(ticket.id, ticket)
             successToast('Ticket aangepast');

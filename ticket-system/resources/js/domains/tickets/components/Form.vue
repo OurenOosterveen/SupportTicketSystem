@@ -1,21 +1,21 @@
 <template>
-    <form class="max-w-100" @submit.prevent="$emit('submit', copyEditable)">
+    <form class="max-w-100" @submit.prevent="$emit('submit', editable)">
         <div class="form-group">
             <label for="title">Titel</label>
             <FormError name="title" />
-            <input id="title" v-model="copyEditable.title" type="text" name="title" class="form-control" />
+            <input id="title" v-model="editable.title" type="text" name="title" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="content">Inhoud</label>
             <FormError name="content" />
-            <textarea id="content" v-model="copyEditable.content" name="content" class="form-control" />
+            <textarea id="content" v-model="editable.content" name="content" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="category">Categorie</label>
-            <FormError name="category" />
-            <select id="category" v-model="copyEditable.category_id" class="form-select">
+            <FormError name="category_id" />
+            <select id="category" v-model="editable.category_id" class="form-select">
                 <option
                     v-for="category in categories"
                     :key="category.id"
@@ -28,8 +28,8 @@
 
         <div class="form-group">
             <label for="status">Status</label>
-            <FormError name="category" />
-            <select id="status" v-model="copyEditable.status_id" class="form-select">
+            <FormError name="status_id" />
+            <select id="status" v-model="editable.status_id" class="form-select">
                 <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.title }}</option>
             </select>
         </div>
@@ -55,7 +55,7 @@ defineEmits<{
     (event: 'cancel'): void;
 }>();
 
-const copyEditable = ref(deepCopy(props.form))
+const editable = ref(deepCopy(props.form))
 
 const categories = categoryStore.getters.all;
 const statuses = statusStore.getters.all;

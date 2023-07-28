@@ -21,7 +21,7 @@ class TicketResource extends JsonResource
             'created_at' => $this->created_at->format('Y-m-d h:m'),
             'updated_at' => $this->updated_at->format('Y-m-d h:m'),
             'user_id' => $this->user_id,
-            'assignee_id' => $this->user_id,
+            'assignee_id' => $this->assignee_id,
             'status_id' => $this->status_id,
             'category_id' => $this->category_id,
         ];
