@@ -3,19 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateTicketRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +15,10 @@ class UpdateTicketRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:500'],
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+            'status_id' => ['required', Rule::exists('statuses', 'id')],
         ];
     }
 }

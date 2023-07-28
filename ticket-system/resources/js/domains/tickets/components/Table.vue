@@ -83,7 +83,7 @@ const updateTicketModal = (updatedTicket: Ticket) => {
         updatedTicket,
         defineAsyncComponent(() => import('./Form.vue')),
         async (ticket: Updatable<Ticket>) => {
-            await ticketStore.actions.create(ticket)
+            await ticketStore.actions.update(ticket.id, ticket)
             successToast('Ticket aangepast');
         },
     )
