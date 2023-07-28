@@ -23,7 +23,7 @@ import {ref} from 'vue';
 import {userStore} from 'domains/users';
 import FormError from 'components/FormError.vue';
 
-const admins = userStore.getters.all.value.filter(user => user.is_admin)
+const admins = userStore.getters.all.value.filter(user => user.is_admin);
 
 const props = defineProps<{
     form: Updatable<Ticket>
