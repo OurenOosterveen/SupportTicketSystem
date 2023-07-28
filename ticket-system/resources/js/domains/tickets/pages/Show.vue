@@ -50,13 +50,13 @@ categoryStore.actions.getAll();
 const ticket = ticketStore.getters.byId(getCurrentRouteId());
 
 const getUserName = (id: number) => {
-    const user = userStore.getters.all.value.find(item => item.id === id);
+    const user = userStore.getters.byId(id).value;
     
     return `${user?.first_name} ${user?.last_name}`
 }
 
-const getCategory = (id: number) => categoryStore.getters.all.value.find(item => item.id === id)?.title;
-const getStatus = (id: number) => statusStore.getters.all.value.find(item => item.id === id)?.title;
+const getCategory = (id: number) => categoryStore.getters.byId(id).value.title;
+const getStatus = (id: number) => statusStore.getters.byId(id).value.title;
 
 const changeStatusModal = () => {
     formModal(
