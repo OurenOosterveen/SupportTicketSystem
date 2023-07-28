@@ -78,8 +78,8 @@ const getUserName = (id: number) => {
     return `${user?.first_name} ${user?.last_name}`
 }
 
-const getCategory = (id: number) => categoryStore.getters.byId(id).value.title
-const getStatus = (id: number) => statusStore.getters.byId(id).value.title;
+const getCategory = (id: number) => categoryStore.getters.byId(id).value?.title
+const getStatus = (id: number) => statusStore.getters.byId(id).value?.title;
 
 const newTicket = ref<New<Ticket>>({
     title: '',

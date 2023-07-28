@@ -1,7 +1,9 @@
 <template>
     <div class="content-view">
         <NavBar v-if="isLoggedIn" class="w-100" />
-        <RouterView style="max-width: 1440px; margin-top: 4rem;" />
+        <div class="content" style="max-width: 1440px; margin-top: 1rem;">
+            <RouterView />
+        </div>
     </div>
 </template>
 
