@@ -28,9 +28,9 @@
                             Actions
                         </a>
     
-                        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="#" @click="updateCategoryModal(category)">Updaten</a>
-                        </div> -->
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -39,7 +39,23 @@
 </template>
 <script setup lang="ts">
 import {Category} from '../types';
+import {Updatable} from 'services/store/types';
+import {categoryStore} from '..';
+import {defineAsyncComponent} from 'vue';
+import {formModal} from 'services/modal';
+import {successToast} from 'services/toast';
 
 defineProps<{categories: Category[]}>();
+
+const updateCategoryModal = (category: Category) => {
+    formModal(
+        category,
+        defineAsyncComponent(() => import('./Form.vue')),
+        async (ticket: Updatable<Category>) => {
+            await categoryStore.actions.update(ticket.id, ticket)
+            successToast('Categorie aangepast');
+        },
+    )
+}
 
 </script>
